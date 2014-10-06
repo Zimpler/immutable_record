@@ -18,7 +18,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Example:
+```ruby
+
+Item = ImmutableRecord.new(:foo, :bar)
+item = Item.new(foo:1, bar:2)
+#=> Item[{:foo=>1, :bar=>2}]
+
+Item.new(foo:1, bar:2).eql?(Item.new(foo:1, bar:2))
+#=> true
+
+Item.new(foo:1, bar:2).eql?(Item.new(foo:1, bar:3))
+#=> true
+
+{
+  Item.new(foo: 1, bar: 2) => "yay!"
+}.fetch(Item.new(foo: 1, bar: 2))
+#=> "yay!"
+
+item.clone(foo: "changed")
+#=> Item[{:foo=>"changed", :bar=>2}]
+
+item.clone {|bar:,**| {bar: bar + 1}}
+#=> Item[{:foo=>1, :bar=>3}]
+```
 
 ## Contributing
 
