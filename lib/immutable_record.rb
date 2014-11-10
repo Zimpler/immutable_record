@@ -25,9 +25,7 @@ module ImmutableRecord
       end
 
       self.class::ATTRIBUTES.each do |attr|
-        val = opts.fetch(attr)
-        val = val.dup.freeze unless val.frozen?
-        instance_variable_set("@#{attr}", val)
+        instance_variable_set("@#{attr}", opts.fetch(attr))
       end
       freeze
     end
@@ -64,13 +62,6 @@ module ImmutableRecord
 
     def hash
       self.class.hash ^ __attributes__.hash
-    end
-
-    def <=> (other)
-      unless other.is_a?(self.class)
-        raise "Can't compare #{self.class} with #{other.class}"
-      end
-      __values__ <=> other.send(:__values__)
     end
 
     def pretty_print (q)
