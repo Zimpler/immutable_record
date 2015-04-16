@@ -1,7 +1,7 @@
 # ImmutableRecord
 
 ImmutableRecord provides simple immutable data structures with accessor
-methods and ActiveRecord style mass-assignment initialization.
+methods and keyword argument initialization.
 
 ## Installation
 
